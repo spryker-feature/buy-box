@@ -1,0 +1,50 @@
+{
+    "name": "spryker-feature/buy-box",
+    "type": "library",
+    "description": "BuyBox module",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.3",
+        "spryker-shop/shop-ui": "^1.102.0",
+        "spryker/kernel": "^3.30.0",
+        "spryker/merchant-storage": "^1.0.0",
+        "spryker/price-product": "^4.0.0",
+        "spryker/price-product-storage": "^4.0.0",
+        "spryker/product-offer-storage": "^1.12.0",
+        "spryker/product-storage": "^1.0.0",
+        "spryker/symfony": "^3.0.0",
+        "spryker/transfer": "^3.27.0"
+    },
+    "require-dev": {
+        "spryker/code-sniffer": "*",
+        "spryker/container": "*",
+        "spryker/testify": "*"
+    },
+    "suggest": {
+        "spryker-shop/availability-widget": "If you want to use components from module AvailabilityWidget",
+        "spryker-shop/merchant-relation-request-widget": "Add the module if you want to use MerchantRelationRequestCreateLinkWidget.",
+        "spryker-shop/price-product-volume-widget": "Add the module if you want to use CurrentProductPriceVolumeWidget."
+    },
+    "autoload": {
+        "psr-4": {
+            "SprykerFeature\\": "src/SprykerFeature/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/",
+        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

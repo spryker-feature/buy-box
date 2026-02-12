@@ -1,0 +1,112 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'buy-box-item',
+} %}
+
+{% define data = {
+    isChecked: required,
+    radioGroupName: required,
+    productOfferReference: required,
+    merchantName: required,
+    merchantUrl: required,
+    merchantReference: null,
+    price: required,
+    currencyIsoCode: required,
+    isRadioButtonVisible: required,
+} %}
+
+{% block body %}
+    <div class="grid grid--nowrap">
+        {% block itemInner %}
+            {% block radioCol %}
+                <div class="col {{ not data.isRadioButtonVisible ? 'is-hidden' }}">
+                    {% block radio %}
+                        {% set selectedAttributes = app.request.get('attribute') | default([]) %}
+                        {% set itemAttributes = {
+                            'selected_merchant_reference_type': 'product_offer_reference',
+                            'selected_merchant_reference': data.productOfferReference
+                        } %}
+                        {% set searchParams = {
+                            attribute: selectedAttributes | merge(itemAttributes)
+                        } | url_encode %}
+
+                        {% include atom('radio') with {
+                            class: config.jsName ~ '__trigger-' ~ data.productOfferReference,
+                            attributes: {
+                                checked: data.isChecked,
+                                name: data.radioGroupName,
+                                value: data.productOfferReference,
+                            },
+                        } only %}
+
+                        {% include molecule('page-location-search-params-updater') with {
+                            attributes: {
+                                'trigger-class': config.jsName ~ '__trigger-' ~ data.productOfferReference,
+                                'search-params': searchParams,
+                            },
+                        } only %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            {% block contentCol %}
+                <div class="col col--expand">
+                    {% block content %}
+                        <div class="grid grid--justify grid--nowrap">
+                            {% block contentInner %}
+                                {% block merchantInfoCol %}
+                                    <div class="col col--expand">
+                                        {% block merchantName %}
+                                            <div>
+                                                <strong>{{ data.merchantName }}</strong>
+                                            </div>
+                                        {% endblock %}
+
+                                        {% block merchantLink %}
+                                            <a class="link link--small" href="{{ functionExists('generatePath') ? generatePath(data.merchantUrl) : data.merchantUrl }}">
+                                                {{ 'buy_box.view_merchant' | trans }}
+                                            </a>
+                                        {% endblock %}
+
+                                        {% block merchantRelationRequestCreateButton %}
+                                            <div>
+                                                {% if data.merchantReference is not null %}
+                                                    {% widget 'MerchantRelationRequestCreateLinkWidget' args [data.merchantReference] only %}
+                                                    {% endwidget %}
+                                                {% endif %}
+                                            </div>
+                                        {% endblock %}
+                                    </div>
+                                {% endblock %}
+
+                                {% block additionalInfoCol %}
+                                    <div class="col {% if data.merchantReference is not null %}text-right{% endif %}">
+                                        {% block price %}
+                                            {% if data.price %}
+                                                {% widget 'CurrentProductPriceVolumeWidget' args [data.price] only %}
+                                                    {% block priceTable %}{% endblock %}
+                                                {% nowidget %}
+                                                    {{ parent() }}
+                                                {% endwidget %}
+                                            {% endif %}
+                                        {% endblock %}
+
+                                        {% block availability %}
+                                            {% set productAvailabilityWidget = findWidget('ProductAvailabilityWidget', [
+                                                data.product
+                                            ]) %}
+                                            {% if productAvailabilityWidget is defined %}
+                                                {% widget productAvailabilityWidget%} {% endwidget %}
+                                            {% endif %}
+                                        {% endblock %}
+                                    </div>
+                                {% endblock %}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        {% endblock %}
+    </div>
+{% endblock %}
