@@ -57,8 +57,10 @@
                             {% block contentInner %}
                                 {% block merchantInfoCol %}
                                     <div class="col col--expand">
+                                        {% set merchantNameClass = 'spacing-bottom--small'%}
+
                                         {% block merchantName %}
-                                            <div>
+                                            <div class="{{ merchantNameClass }}">
                                                 <strong>{{ data.merchantName }}</strong>
                                             </div>
                                         {% endblock %}
@@ -94,10 +96,10 @@
 
                                         {% block availability %}
                                             {% set productAvailabilityWidget = findWidget('ProductAvailabilityWidget', [
-                                                data.product
+                                                data.product,
                                             ]) %}
                                             {% if productAvailabilityWidget is defined %}
-                                                {% widget productAvailabilityWidget%} {% endwidget %}
+                                                {% widget productAvailabilityWidget only %}{% endwidget %}
                                             {% endif %}
                                         {% endblock %}
                                     </div>
