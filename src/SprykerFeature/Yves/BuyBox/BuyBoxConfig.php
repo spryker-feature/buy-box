@@ -23,6 +23,8 @@ class BuyBoxConfig extends AbstractBundleConfig
      */
     public const string SORT_BY_STOCK = 'stock';
 
+    protected const string CONFIGURATION_KEY_MARKETPLACE_PDP_BUY_BOX_OFFER_SORT_RULE = 'marketplace:pdp:buy_box:offer_sort_rule';
+
     /**
      * Specification:
      * - Returns the sorting strategy for buy box products.
@@ -32,6 +34,6 @@ class BuyBoxConfig extends AbstractBundleConfig
      */
     public function getSortingStrategy(): string
     {
-        return static::SORT_BY_PRICE;
+        return $this->getModuleConfig(static::CONFIGURATION_KEY_MARKETPLACE_PDP_BUY_BOX_OFFER_SORT_RULE, static::SORT_BY_PRICE);
     }
 }

@@ -1,0 +1,12 @@
+Marketplace,Marktplatz
+"Marketplace-related configuration","Marktplatz-bezogene Konfiguration"
+"Product Detail Page",Produktdetailseite
+"Product Detail Page configuration.","Konfiguration der Produktdetailseite."
+"Buy Box","Buy Box"
+"Controls how merchant offers are sorted and prioritised in the Buy Box on the Product Detail Page.","Steuert, wie Händlerangebote in der Buy Box auf der Produktdetailseite sortiert und priorisiert werden."
+"Offer Sort Rule","Regel zur Sortierung von Angeboten"
+"Primary rule used to order merchant offers in the Buy Box.","Primäre Regel zur Anordnung von Händlerangeboten in der Buy Box."
+"Sort by lowest price first","Nach niedrigstem Preis zuerst sortieren"
+"Merchant offers are sorted in ascending order by final price. The lowest price offer is displayed first in the Buy Box. When multiple offers share the same price, a deterministic fallback rule (e.g. stock amount or merchant ID) is applied.","Händlerangebote werden in aufsteigender Reihenfolge nach Endpreis sortiert. Das Angebot mit dem niedrigsten Preis wird zuerst in der Buy Box angezeigt. Wenn mehrere Angebote den gleichen Preis haben, wird eine deterministische Fallback-Regel (z.B. Lagerbestand oder Händler-ID) angewendet."
+"Sort by highest stock amount first","Nach höchster Lagerbestand zuerst sortieren"
+"Merchant offers are sorted in descending order by available stock. The offer with the highest stock quantity is displayed first.","Händlerangebote werden in absteigender Reihenfolge nach verfügbarem Lagerbestand sortiert. Das Angebot mit der höchsten Lagerbestandsmenge wird zuerst angezeigt."

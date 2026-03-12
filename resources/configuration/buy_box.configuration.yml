@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../../../Spryker/Configuration/resources/configuration/configuration-schema-v1.json
+features:
+    - key: marketplace
+      name: Marketplace
+      description: Marketplace-related configuration.
+      enabled: true
+      order: 0
+      tabs:
+          - key: pdp
+            name: Product Detail Page
+            description: Product Detail Page configuration.
+            enabled: true
+            order: 0
+            groups:
+                - key: buy_box
+                  name: Buy Box
+                  description: Controls how merchant offers are sorted and prioritised in the Buy Box on the Product Detail Page.
+                  enabled: true
+                  order: 0
+                  scopes:
+                      - global
+                      - store
+                  settings:
+                      - key: offer_sort_rule
+                        name: Offer Sort Rule
+                        description: 'Primary rule used to order merchant offers in the Buy Box.'
+                        type: radio
+                        default_value: price
+                        enabled: true
+                        secret: false
+                        storefront: true
+                        order: 0
+                        scopes:
+                            - global
+                            - store
+                        options:
+                            - value: price
+                              label: Sort by lowest price first
+                              description: 'Merchant offers are sorted in ascending order by final price. The lowest price offer is displayed first in the Buy Box. When multiple offers share the same price, a deterministic fallback rule (e.g. stock amount or merchant ID) is applied.'
+                            - value: stock
+                              label: Sort by highest stock amount first
+                              description: 'Merchant offers are sorted in descending order by available stock. The offer with the highest stock quantity is displayed first.'

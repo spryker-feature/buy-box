@@ -1,0 +1,12 @@
+Marketplace,Marketplace
+"Marketplace-related configuration","Marketplace-related configuration"
+"Product Detail Page","Product Detail Page"
+"Product Detail Page configuration.","Product Detail Page configuration."
+"Buy Box","Buy Box"
+"Controls how merchant offers are sorted and prioritised in the Buy Box on the Product Detail Page.","Controls how merchant offers are sorted and prioritised in the Buy Box on the Product Detail Page."
+"Offer Sort Rule","Offer Sort Rule"
+"Primary rule used to order merchant offers in the Buy Box.","Primary rule used to order merchant offers in the Buy Box."
+"Sort by lowest price first","Sort by lowest price first"
+"Merchant offers are sorted in ascending order by final price. The lowest price offer is displayed first in the Buy Box. When multiple offers share the same price, a deterministic fallback rule (e.g. stock amount or merchant ID) is applied.","Merchant offers are sorted in ascending order by final price. The lowest price offer is displayed first in the Buy Box. When multiple offers share the same price, a deterministic fallback rule (e.g. stock amount or merchant ID) is applied."
+"Sort by highest stock amount first","Sort by highest stock amount first"
+"Merchant offers are sorted in descending order by available stock. The offer with the highest stock quantity is displayed first.","Merchant offers are sorted in descending order by available stock. The offer with the highest stock quantity is displayed first."
