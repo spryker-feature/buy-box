@@ -69,7 +69,8 @@ class BuyBoxWidget extends AbstractWidget
     }
 
     /**
-     * Overrides $productViewTransfer with productOfferReference, availability, currentProductPrice from preselected product offer or merchant product.
+     * Overrides $productViewTransfer with productOfferReference and availability from the preselected product offer or merchant product,
+     * and, when no product configuration instance is present, also the currentProductPrice.
      *
      * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      * @param array<\Generated\Shared\Transfer\BuyBoxProductTransfer> $buyBoxProducts
@@ -97,8 +98,13 @@ class BuyBoxWidget extends AbstractWidget
     ): void {
         $productViewTransfer
             ->setAvailable($preSelectedProduct->getIsAvailable())
-            ->setCurrentProductPrice($preSelectedProduct->getPrice())
             ->setProductOfferReference($preSelectedProduct->getProductOfferReference());
+
+        if ($productViewTransfer->getProductConfigurationInstance() !== null) {
+            return;
+        }
+
+        $productViewTransfer->setCurrentProductPrice($preSelectedProduct->getPrice());
     }
 
     /**
