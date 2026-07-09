@@ -43,6 +43,14 @@ class BuyBoxFactory extends AbstractFactory
     }
 
     /**
+     * @return array<\SprykerFeature\Yves\BuyBox\Dependency\Plugin\BuyBoxRenderConditionPluginInterface>
+     */
+    public function getBuyBoxRenderConditionPlugins(): array
+    {
+        return $this->getProvidedDependency(BuyBoxDependencyProvider::PLUGINS_BUY_BOX_RENDER_CONDITION);
+    }
+
+    /**
      * @return array<\SprykerFeature\Yves\BuyBox\Reader\ProductReaderInterface>
      */
     public function getProductReaders(): array

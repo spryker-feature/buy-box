@@ -29,6 +29,7 @@
         <property name="currentProductPrice" type="CurrentProductPrice"/>
         <property name="productOfferReference" type="string"/>
         <property name="quantity" type="int"/>
+        <property name="productConfigurationInstance" type="ProductConfigurationInstance"/>
     </transfer>
 
     <transfer name="CurrentProductPrice">
@@ -54,6 +55,9 @@
     </transfer>
 
     <transfer name="ProductMeasurementUnit">
+    </transfer>
+
+    <transfer name="ProductConfigurationInstance">
     </transfer>
 
     <transfer name="ProductOfferStorageCollection">

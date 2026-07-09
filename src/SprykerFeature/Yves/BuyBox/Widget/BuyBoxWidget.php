@@ -30,6 +30,13 @@ class BuyBoxWidget extends AbstractWidget
 
     public function __construct(ProductViewTransfer $productViewTransfer, Request $request)
     {
+        if (!$this->shouldRenderBuyBox($productViewTransfer)) {
+            $this->addProductsParameter([]);
+            $this->addProductViewParameter($productViewTransfer);
+
+            return;
+        }
+
         $buyBoxProducts = $this->collectBuyBoxProducts($productViewTransfer);
         $this->expandProductViewTransfer($productViewTransfer, $buyBoxProducts, $request);
         $this->addProductsParameter($buyBoxProducts);
@@ -69,8 +76,7 @@ class BuyBoxWidget extends AbstractWidget
     }
 
     /**
-     * Overrides $productViewTransfer with productOfferReference and availability from the preselected product offer or merchant product,
-     * and, when no product configuration instance is present, also the currentProductPrice.
+     * Overrides $productViewTransfer with productOfferReference, availability and currentProductPrice from the preselected product offer or merchant product.
      *
      * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      * @param array<\Generated\Shared\Transfer\BuyBoxProductTransfer> $buyBoxProducts
@@ -85,7 +91,7 @@ class BuyBoxWidget extends AbstractWidget
     ): void {
         $preSelectedProduct = $buyBoxProducts[0] ?? null;
 
-        if (!$this->isPreSelected($request) || !$preSelectedProduct) {
+        if ($preSelectedProduct === null || !$this->shouldPreSelectProduct($request, $buyBoxProducts)) {
             return;
         }
 
@@ -98,31 +104,38 @@ class BuyBoxWidget extends AbstractWidget
     ): void {
         $productViewTransfer
             ->setAvailable($preSelectedProduct->getIsAvailable())
-            ->setProductOfferReference($preSelectedProduct->getProductOfferReference());
+            ->setProductOfferReference($preSelectedProduct->getProductOfferReference())
+            ->setCurrentProductPrice($preSelectedProduct->getPrice());
+    }
 
-        if ($productViewTransfer->getProductConfigurationInstance() !== null) {
-            return;
-        }
-
-        $productViewTransfer->setCurrentProductPrice($preSelectedProduct->getPrice());
+    protected function addProductViewParameter(ProductViewTransfer $productViewTransfer): void
+    {
+        $this->addParameter(static::PARAMETER_PRODUCT_VIEW, $productViewTransfer);
     }
 
     /**
-     * Determines if default pre-selection should be applied.
-     *
-     * Returns true when no 'selected_merchant_reference' exists in URL parameters,
-     * indicating the first product should be pre-selected automatically.
+     * @param array<\Generated\Shared\Transfer\BuyBoxProductTransfer> $buyBoxProducts
      */
-    protected function isPreSelected(Request $request): bool
+    protected function shouldPreSelectProduct(Request $request, array $buyBoxProducts): bool
     {
+        if (count($buyBoxProducts) <= 1) {
+            return false;
+        }
+
         $selectedAttributes = $request->query->all(static::REQUEST_PARAM_ATTRIBUTE);
 
         return !isset($selectedAttributes[static::ATTRIBUTE_SELECTED_MERCHANT_REFERENCE_TYPE])
             && !isset($selectedAttributes[static::ATTRIBUTE_SELECTED_MERCHANT_REFERENCE]);
     }
 
-    protected function addProductViewParameter(ProductViewTransfer $productViewTransfer): void
+    protected function shouldRenderBuyBox(ProductViewTransfer $productViewTransfer): bool
     {
-        $this->addParameter(static::PARAMETER_PRODUCT_VIEW, $productViewTransfer);
+        foreach ($this->getFactory()->getBuyBoxRenderConditionPlugins() as $buyBoxRenderConditionPlugin) {
+            if (!$buyBoxRenderConditionPlugin->checkCondition($productViewTransfer)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

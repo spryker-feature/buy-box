@@ -22,6 +22,8 @@ class BuyBoxDependencyProvider extends AbstractBundleDependencyProvider
 
     public const string CLIENT_PRICE_PRODUCT = 'CLIENT_PRICE_PRODUCT';
 
+    public const string PLUGINS_BUY_BOX_RENDER_CONDITION = 'PLUGINS_BUY_BOX_RENDER_CONDITION';
+
     public function provideDependencies(Container $container): Container
     {
         $container = parent::provideDependencies($container);
@@ -31,6 +33,7 @@ class BuyBoxDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addProductStorageClient($container);
         $container = $this->addPriceProductClient($container);
         $container = $this->addPriceProductStorageClient($container);
+        $container = $this->addBuyBoxRenderConditionPlugins($container);
 
         return $container;
     }
@@ -78,5 +81,22 @@ class BuyBoxDependencyProvider extends AbstractBundleDependencyProvider
         });
 
         return $container;
+    }
+
+    protected function addBuyBoxRenderConditionPlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_BUY_BOX_RENDER_CONDITION, function () {
+            return $this->getBuyBoxRenderConditionPlugins();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return array<\SprykerFeature\Yves\BuyBox\Dependency\Plugin\BuyBoxRenderConditionPluginInterface>
+     */
+    protected function getBuyBoxRenderConditionPlugins(): array
+    {
+        return [];
     }
 }
