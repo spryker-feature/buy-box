@@ -12,10 +12,9 @@ use Generated\Shared\Transfer\ProductViewTransfer;
 interface BuyBoxProductCollectorInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     * @param string $localeName
+     * @param array<string, mixed> $context
      *
      * @return array<\Generated\Shared\Transfer\BuyBoxProductTransfer>
      */
-    public function collectBuyBoxProducts(ProductViewTransfer $productViewTransfer, string $localeName): array;
+    public function collectBuyBoxProducts(ProductViewTransfer $productViewTransfer, string $localeName, array $context = []): array;
 }

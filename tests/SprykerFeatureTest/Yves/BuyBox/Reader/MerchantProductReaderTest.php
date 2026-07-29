@@ -68,6 +68,24 @@ class MerchantProductReaderTest extends Unit
         }
     }
 
+    public function testGetBuyBoxProductsReturnsEmptyArrayWhenMerchantProductLoadingIsSkipped(): void
+    {
+        // Arrange
+        $reader = $this->createReader(
+            ['name' => 'Test Product', 'merchantReference' => 'MR-1'],
+            (new MerchantStorageTransfer())->setIdMerchant(1)->setName('Test Merchant'),
+        );
+        $productViewTransfer = (new ProductViewTransfer())
+            ->setIdProductConcrete(1)
+            ->setIdProductAbstract(1);
+
+        // Act
+        $result = $reader->getBuyBoxProducts($productViewTransfer, 'en_US', ['is_merchant_product_loading_skipped' => true]);
+
+        // Assert
+        $this->assertCount(0, $result);
+    }
+
     public function testGetBuyBoxProductsWithMissingIdProductAbstractNegative(): void
     {
         // Arrange

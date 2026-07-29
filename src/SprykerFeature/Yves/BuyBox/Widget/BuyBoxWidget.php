@@ -28,7 +28,10 @@ class BuyBoxWidget extends AbstractWidget
 
     protected const string ATTRIBUTE_SELECTED_MERCHANT_REFERENCE = 'selected_merchant_reference';
 
-    public function __construct(ProductViewTransfer $productViewTransfer, Request $request)
+    /**
+     * @param array<string, mixed> $context
+     */
+    public function __construct(ProductViewTransfer $productViewTransfer, Request $request, array $context = [])
     {
         if (!$this->shouldRenderBuyBox($productViewTransfer)) {
             $this->addProductsParameter([]);
@@ -37,7 +40,7 @@ class BuyBoxWidget extends AbstractWidget
             return;
         }
 
-        $buyBoxProducts = $this->collectBuyBoxProducts($productViewTransfer);
+        $buyBoxProducts = $this->collectBuyBoxProducts($productViewTransfer, $context);
         $this->expandProductViewTransfer($productViewTransfer, $buyBoxProducts, $request);
         $this->addProductsParameter($buyBoxProducts);
         $this->addProductViewParameter($productViewTransfer);
@@ -54,15 +57,15 @@ class BuyBoxWidget extends AbstractWidget
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
+     * @param array<string, mixed> $context
      *
      * @return array<\Generated\Shared\Transfer\BuyBoxProductTransfer>
      */
-    protected function collectBuyBoxProducts(ProductViewTransfer $productViewTransfer): array
+    protected function collectBuyBoxProducts(ProductViewTransfer $productViewTransfer, array $context = []): array
     {
         return $this->getFactory()
             ->createBuyBoxProductCollector()
-            ->collectBuyBoxProducts($productViewTransfer, $this->getLocale());
+            ->collectBuyBoxProducts($productViewTransfer, $this->getLocale(), $context);
     }
 
     /**

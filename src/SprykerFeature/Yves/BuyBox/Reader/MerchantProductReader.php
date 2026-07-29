@@ -19,6 +19,8 @@ use Spryker\Client\ProductStorage\ProductStorageClientInterface;
 
 class MerchantProductReader implements ProductReaderInterface
 {
+    protected const string CONTEXT_KEY_IS_MERCHANT_PRODUCT_LOADING_SKIPPED = 'is_merchant_product_loading_skipped';
+
     public function __construct(
         protected MerchantStorageClientInterface $merchantStorageClient,
         protected ProductStorageClientInterface $productStorageClient,
@@ -28,14 +30,15 @@ class MerchantProductReader implements ProductReaderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     * @param string $localeName
+     * @param array<string, mixed> $context
      *
      * @return array<\Generated\Shared\Transfer\BuyBoxProductTransfer>
      */
-    public function getBuyBoxProducts(ProductViewTransfer $productViewTransfer, string $localeName): array
+    public function getBuyBoxProducts(ProductViewTransfer $productViewTransfer, string $localeName, array $context = []): array
     {
-        if (!$productViewTransfer->getIdProductConcrete()) {
+        $isMerchantProductLoadingSkipped = $context[static::CONTEXT_KEY_IS_MERCHANT_PRODUCT_LOADING_SKIPPED] ?? false;
+
+        if (!$productViewTransfer->getIdProductConcrete() || $isMerchantProductLoadingSkipped) {
             return [];
         }
 

@@ -20,15 +20,16 @@ class MerchantProductOfferReader implements ProductReaderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     * @param string $localeName
+     * @param array<string, mixed> $context
      *
      * @return array<\Generated\Shared\Transfer\BuyBoxProductTransfer>
      */
-    public function getBuyBoxProducts(ProductViewTransfer $productViewTransfer, string $localeName): array
+    public function getBuyBoxProducts(ProductViewTransfer $productViewTransfer, string $localeName, array $context = []): array
     {
         $sku = $productViewTransfer->getSkuOrFail();
-        $productOfferStorageCriteriaTransfer = (new ProductOfferStorageCriteriaTransfer())->addProductConcreteSku($sku);
+        $productOfferStorageCriteriaTransfer = (new ProductOfferStorageCriteriaTransfer())
+            ->fromArray($context, true)
+            ->addProductConcreteSku($sku);
 
         $productOfferStorageCollectionTransfer = $this->productOfferStorageClient->getProductOfferStoragesBySkus($productOfferStorageCriteriaTransfer);
 

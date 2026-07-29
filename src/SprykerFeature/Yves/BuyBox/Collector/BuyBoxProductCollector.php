@@ -28,12 +28,11 @@ class BuyBoxProductCollector implements BuyBoxProductCollectorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     * @param string $localeName
+     * @param array<string, mixed> $context
      *
      * @return array<\Generated\Shared\Transfer\BuyBoxProductTransfer>
      */
-    public function collectBuyBoxProducts(ProductViewTransfer $productViewTransfer, string $localeName): array
+    public function collectBuyBoxProducts(ProductViewTransfer $productViewTransfer, string $localeName, array $context = []): array
     {
         if (!$productViewTransfer->getIdProductConcrete()) {
             return [];
@@ -41,7 +40,7 @@ class BuyBoxProductCollector implements BuyBoxProductCollectorInterface
 
         $buyBoxProducts = [];
         foreach ($this->buyBoxProductReaders as $productReader) {
-            $buyBoxProducts = array_merge($buyBoxProducts, $productReader->getBuyBoxProducts($productViewTransfer, $localeName));
+            $buyBoxProducts = array_merge($buyBoxProducts, $productReader->getBuyBoxProducts($productViewTransfer, $localeName, $context));
         }
 
         foreach ($this->buyBoxProductExpanders as $buyBoxProductExpander) {
