@@ -138,8 +138,6 @@ class BuyBoxWidgetTest extends Unit
 
     /**
      * @param array<\SprykerFeature\Yves\BuyBox\Dependency\Plugin\BuyBoxRenderConditionPluginInterface> $buyBoxRenderConditionPlugins
-     *
-     * @return \SprykerFeature\Yves\BuyBox\Widget\BuyBoxWidget
      */
     protected function createWidgetWithRenderConditionPlugins(array $buyBoxRenderConditionPlugins): BuyBoxWidget
     {

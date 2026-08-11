@@ -18,10 +18,6 @@ interface BuyBoxRenderConditionPluginInterface
      * - Returns `false` when the condition is not satisfied and the buy box must not be rendered for the product.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     *
-     * @return bool
      */
     public function checkCondition(ProductViewTransfer $productViewTransfer): bool;
 }

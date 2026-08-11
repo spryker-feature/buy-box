@@ -70,8 +70,6 @@ class BuyBoxWidget extends AbstractWidget
 
     /**
      * @param array<\Generated\Shared\Transfer\BuyBoxProductTransfer> $buyBoxProducts
-     *
-     * @return void
      */
     protected function addProductsParameter(array $buyBoxProducts): void
     {
@@ -81,11 +79,7 @@ class BuyBoxWidget extends AbstractWidget
     /**
      * Overrides $productViewTransfer with productOfferReference, availability and currentProductPrice from the preselected product offer or merchant product.
      *
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      * @param array<\Generated\Shared\Transfer\BuyBoxProductTransfer> $buyBoxProducts
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return void
      */
     protected function expandProductViewTransfer(
         ProductViewTransfer $productViewTransfer,

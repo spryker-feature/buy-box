@@ -26,8 +26,6 @@ class InventoryStatusExpanderTest extends Unit
      *
      * @param array<\Generated\Shared\Transfer\BuyBoxProductTransfer> $buyBoxProductTransfers
      * @param array<string> $expectedStatuses
-     *
-     * @return void
      */
     public function testExpandInventoryStatus(
         array $buyBoxProductTransfers,

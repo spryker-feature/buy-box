@@ -17,7 +17,6 @@ class BuyBoxProductCollector implements BuyBoxProductCollectorInterface
      * @param array<\SprykerFeature\Yves\BuyBox\Reader\ProductReaderInterface> $buyBoxProductReaders
      * @param array<\SprykerFeature\Yves\BuyBox\Expander\BuyBoxProductExpanderInterface> $buyBoxProductExpanders
      * @param \Spryker\Shared\Kernel\StrategyResolverInterface<\SprykerFeature\Yves\BuyBox\Sorter\BuyBoxProductSorterInterface> $sortStrategyResolver
-     * @param \SprykerFeature\Yves\BuyBox\BuyBoxConfig $config
      */
     public function __construct(
         protected array $buyBoxProductReaders,

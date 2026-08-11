@@ -13,7 +13,6 @@ class MerchantUrlExpander implements BuyBoxProductExpanderInterface
 {
     /**
      * @param array<\Generated\Shared\Transfer\BuyBoxProductTransfer> $buyBoxProductTransfers
-     * @param string $localeName
      *
      * @return array<\Generated\Shared\Transfer\BuyBoxProductTransfer>
      */

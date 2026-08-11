@@ -29,10 +29,7 @@ class MerchantProductOfferReaderTest extends Unit
      * @dataProvider getBuyBoxProductsDataProvider
      *
      * @param array<\Generated\Shared\Transfer\ProductOfferStorageTransfer> $productOffers
-     * @param int $expectedCount
      * @param array<array<string, mixed>> $expectedProducts
-     *
-     * @return void
      */
     public function testGetBuyBoxProducts(
         array $productOffers,
@@ -118,8 +115,6 @@ class MerchantProductOfferReaderTest extends Unit
 
     /**
      * @param array<\Generated\Shared\Transfer\ProductOfferStorageTransfer> $productOffers
-     *
-     * @return \SprykerFeature\Yves\BuyBox\Reader\MerchantProductOfferReader
      */
     protected function createReaderWithMockedClient(array $productOffers): MerchantProductOfferReader
     {
@@ -130,8 +125,6 @@ class MerchantProductOfferReaderTest extends Unit
 
     /**
      * @param array<\Generated\Shared\Transfer\ProductOfferStorageTransfer> $productOffers
-     *
-     * @return \Spryker\Client\ProductOfferStorage\ProductOfferStorageClientInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function createProductOfferStorageClientMock(array $productOffers): ProductOfferStorageClientInterface|MockObject
     {

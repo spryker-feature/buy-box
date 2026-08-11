@@ -31,14 +31,8 @@ class BuyBoxProductCollectorTest extends Unit
     /**
      * @dataProvider getCollectBuyBoxProductsDataProvider
      *
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      * @param array<array<\Generated\Shared\Transfer\BuyBoxProductTransfer>> $readerResults
-     * @param int $expanderCallCount
-     * @param int $expectedCount
-     * @param string|null $sortingStrategy
      * @param array<\Generated\Shared\Transfer\BuyBoxProductTransfer>|null $expectedProductOrder
-     *
-     * @return void
      */
     public function testCollectBuyBoxProducts(
         ProductViewTransfer $productViewTransfer,
@@ -224,8 +218,6 @@ class BuyBoxProductCollectorTest extends Unit
     }
 
     /**
-     * @param string $sortingStrategy
-     *
      * @return \Spryker\Shared\Kernel\StrategyResolverInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function createSorterResolverMock(string $sortingStrategy): StrategyResolverInterface
@@ -241,8 +233,6 @@ class BuyBoxProductCollectorTest extends Unit
     }
 
     /**
-     * @param string $sortingStrategy
-     *
      * @return \SprykerFeature\Yves\BuyBox\BuyBoxConfig|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function createConfigMock(string $sortingStrategy): BuyBoxConfig

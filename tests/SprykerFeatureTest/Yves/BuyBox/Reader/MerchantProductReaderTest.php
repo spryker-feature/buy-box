@@ -31,13 +31,8 @@ class MerchantProductReaderTest extends Unit
     /**
      * @dataProvider getBuyBoxProductsDataProvider
      *
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      * @param array<string, mixed>|null $productAbstractStorageData
-     * @param \Generated\Shared\Transfer\MerchantStorageTransfer|null $merchantStorageTransfer
-     * @param int $expectedCount
      * @param array<string, mixed>|null $expectedData
-     *
-     * @return void
      */
     public function testGetBuyBoxProducts(
         ProductViewTransfer $productViewTransfer,
@@ -187,9 +182,6 @@ class MerchantProductReaderTest extends Unit
 
     /**
      * @param array<string, mixed>|null $productAbstractStorageData
-     * @param \Generated\Shared\Transfer\MerchantStorageTransfer|null $merchantStorageTransfer
-     *
-     * @return \SprykerFeature\Yves\BuyBox\Reader\MerchantProductReader
      */
     protected function createReader(
         ?array $productAbstractStorageData,
@@ -209,8 +201,6 @@ class MerchantProductReaderTest extends Unit
     }
 
     /**
-     * @param \Generated\Shared\Transfer\MerchantStorageTransfer|null $merchantStorageTransfer
-     *
      * @return \Spryker\Client\MerchantStorage\MerchantStorageClientInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function createMerchantStorageClientMock(?MerchantStorageTransfer $merchantStorageTransfer): MerchantStorageClientInterface|MockObject
@@ -223,8 +213,6 @@ class MerchantProductReaderTest extends Unit
 
     /**
      * @param array<string, mixed>|null $productAbstractStorageData
-     *
-     * @return \Spryker\Client\ProductStorage\ProductStorageClientInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function createProductStorageClientMock(?array $productAbstractStorageData): ProductStorageClientInterface|MockObject
     {

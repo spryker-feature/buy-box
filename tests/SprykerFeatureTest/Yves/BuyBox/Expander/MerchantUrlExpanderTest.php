@@ -26,10 +26,7 @@ class MerchantUrlExpanderTest extends Unit
      * @dataProvider getMerchantUrlDataProvider
      *
      * @param array<\Generated\Shared\Transfer\BuyBoxProductTransfer> $buyBoxProductTransfers
-     * @param string $localeName
      * @param array<string> $expectedUrls
-     *
-     * @return void
      */
     public function testExpandMerchantUrl(
         array $buyBoxProductTransfers,
