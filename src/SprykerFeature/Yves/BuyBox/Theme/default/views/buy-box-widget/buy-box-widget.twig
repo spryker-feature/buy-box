@@ -12,6 +12,8 @@
 
 {% block template %}
     {% if data.products %}
+        {% set isSingleProduct = data.products | length == 1 %}
+
         <h6 class="spacing-y">{{ 'buy_box.sold_by' | trans }}</h6>
 
         {% block productList %}
@@ -22,7 +24,7 @@
                     {% include molecule('buy-box-item', 'BuyBox') with {
                         class: 'spacing-y',
                         data: {
-                            isChecked: data.productView.productOfferReference is same as(product.productOfferReference),
+                            isChecked: isSingleProduct or data.productView.productOfferReference is same as(product.productOfferReference),
                             radioGroupName: 'product_offer_reference',
                             productOfferReference: product.productOfferReference | default,
                             merchantName: merchant.name | default,
@@ -30,7 +32,7 @@
                             merchantReference: merchant.merchantReference | default(null),
                             price: product.price | default(null),
                             currencyIsoCode: product.price.currency.code | default(null),
-                            isRadioButtonVisible: data.products | length > 1,
+                            isRadioButtonVisible: not isSingleProduct,
                             product: product,
                             pageReload: data.pageReload,
                         }
