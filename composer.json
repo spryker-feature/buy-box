@@ -30,6 +30,11 @@
             "SprykerFeature\\": "src/SprykerFeature/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "SprykerFeatureTest\\": "tests/SprykerFeatureTest/"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
